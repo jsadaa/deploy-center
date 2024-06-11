@@ -38,11 +38,11 @@ The project is structured as follows:
 
 To deploy an application, add your specific ssh keys to you ssh config (`~/.ssh/config`), like this :
 
-```bash
+```
 Host my-target-machine
-    HostName
-    User
-    IdentityFile
+    HostName my-target-machine-ip-or-domain
+    User my-target-machine-user
+    IdentityFile ~/.ssh/my-target-machine-ssh-key
 ```
 
 Then set up the `*.env (prod, staging, dev, .etc)` file in the project targeted environment directory, then run the `deploy-center.sh` script.
