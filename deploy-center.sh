@@ -16,9 +16,9 @@ done
 # Move to the project directory
 cd "$project"
 
-# Select the environment to deploy
+# parse all files finishing with .env, get the all the environment (prod.env, dev.env, etc) and propose them to the user
 echo "Which environment do you want to deploy?"
-select environment in $(ls -d */); do
+select environment in $(ls -d *.env); do
     if [ -n "$environment" ]; then
         break
     else
@@ -26,9 +26,9 @@ select environment in $(ls -d */); do
     fi
 done
 
-# Remove trailing slashes
+# Clean the project and environment variables
 project=${project%/}
-environment=${environment%/}
+environment=${environment%.env}
 
 # Ask for the server IP address
 echo "Enter the IP address of the server where you want to deploy the project:"
@@ -42,10 +42,13 @@ read username
 echo "Creating project deploy folder on server..."
 ssh -tt "$username@$server_ip" "mkdir -p /home/$username/$project-$environment"
 
-# Copy the project files to the server
+# Copy the specific environment file to the server
+echo "Copying environment file to server..."
+scp "$environment.env" "$username@$server_ip:/home/$username/$project-$environment/.env"
+
+# Copy the deployment files to the server
 echo "Copying project files to server..."
-scp -r . "$username@$server_ip:/home/$username/$project-$environment"
-scp -r "$environment/" "$username@$server_ip:/home/$username/$project-$environment/"
+find . -type f ! -name '*.env' | xargs -I {} scp {} "$username@$server_ip:/home/$username/$project-$environment/"
 
 # Deploy the project (initial deployment or update)
 echo "Deploying project..."
