@@ -16,7 +16,7 @@ done
 # Move to the project directory
 cd "$project"
 
-# Parse all files finishing with .env, get all the environments (prod.env, dev.env, etc) and propose them to the user
+# Select the environment to deploy
 echo "Which environment do you want to deploy?"
 select environment in $(ls -d *.env); do
     if [ -n "$environment" ]; then
@@ -69,7 +69,7 @@ fi
 # Get the username from the SSH alias (assuming the format user@host in the alias)
 ssh_user=$(awk "/^Host $ssh_alias\$/{flag=1; next} /^Host /{flag=0} flag && /User/{print \$2}" ~/.ssh/config)
 if [ -z "$ssh_user" ]; then
-    ssh_user=$USER  # Fallback to the current user if not specified in the config
+    ssh_user=$USER  # Fallback to the current user
 fi
 
 # Create the project deploy folder on the server
