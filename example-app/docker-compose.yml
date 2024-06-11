@@ -1,0 +1,35 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                APP_ENV: "${APP_ENV}"
+                BRANCH: "${BRANCH}"
+                PROJECT: "${PROJECT}"
+                DB_DATABASE: "${DB_DATABASE}"
+                GITHUB_REPOSITORY: "${GITHUB_REPOSITORY}"
+                APP_PORT: "${APP_PORT}"
+        ports:
+            - "${APP_PORT}:80"
+        environment:
+            MYSQL_HOST: db
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
+            APP_ENV: "${APP_ENV}"
+        links:
+            - db
+    db:
+        image: mariadb:latest
+        restart: always
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: "${DB_DATABASE}"
+        volumes:
+            - db_data:/var/lib/mysql
+
+volumes:
+    db_data:
