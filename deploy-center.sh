@@ -44,7 +44,8 @@ ssh -tt "$username@$server_ip" "mkdir -p /home/$username/$project-$environment"
 
 # Copy the project files to the server
 echo "Copying project files to server..."
-find . -type f | xargs -I {} scp {} "$username@$server_ip:/home/$username/$project-$environment"
+scp -r . "$username@$server_ip:/home/$username/$project-$environment"
+scp -r "$environment/" "$username@$server_ip:/home/$username/$project-$environment/"
 
 # Deploy the project (initial deployment or update)
 echo "Deploying project..."
