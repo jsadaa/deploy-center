@@ -2,9 +2,9 @@
 
 ## Description
 
-This is a small personal project to deploy my LAMP stack applications using Docker.
+This is a small personal project (initiated in school) to deploy my LAMP stack applications using Docker.
 
-It is still a work in progress, but the idea is to have a central script to deploy all my applications, with a simple and consistent structure.
+It is still a work in progress, but the idea is to have a central script to deploy all my personal PHP apps, with a simple and consistent structure.
 My experience with Docker is still limited (~1 year), so I'm open to any suggestions or improvements (especially security-wise).
 
 ## Requirements
