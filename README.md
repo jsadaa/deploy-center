@@ -15,7 +15,6 @@ My experience with Docker is still limited (~1 year), so I'm open to any suggest
 
 - Docker
 - Docker Compose
-- Portainer (optional but recommended) `docker run -d --name portainer -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer`
 
 #### Permissions
 
@@ -35,10 +34,9 @@ Then, log out and log back in.
 The project is structured as follows:
 
 - A `deploy-center.sh` at the root of the project, which is the main script to deploy the applications.
-- Each project has its own directory, containing a `docker-compose.yml`, a `Dockerfile`, an `entrypoint.sh`, a `vhost.conf` and the specific ssh keys to clone the repository.
-- Each environment has its own `.env` file in a subdirectory of the project directory.
+- Each project must have its own directory, containing a `docker-compose.yml`, a `Dockerfile`, an `entrypoint.sh`, a `vhost.conf`, the specific ssh key, and a `*.env` file for each environment.
 
-To deploy an application, add your ssh keys at the targeted project root, set up the `.env` file in the project targeted environment directory, then run the `deploy-center.sh` script.
+To deploy an application, add your ssh keys at the targeted project root, set up the `*.env (prod, staging, dev, .etc)` file in the project targeted environment directory, then run the `deploy-center.sh` script.
 
 ```bash
 ./deploy-center.sh
