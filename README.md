@@ -34,15 +34,24 @@ Then, log out and log back in.
 The project is structured as follows:
 
 - A `deploy-center.sh` at the root of the project, which is the main script to deploy the applications.
-- Each project must have its own directory, containing a `docker-compose.yml`, a `Dockerfile`, an `entrypoint.sh`, a `vhost.conf`, the specific ssh key, and a `*.env` file for each environment.
+- Each project must have its own directory, containing a `docker-compose.yml`, a `Dockerfile`, an `entrypoint.sh`, a `vhost.conf`, and a `*.env` file for each environment.
 
-To deploy an application, add your ssh keys at the targeted project root, set up the `*.env (prod, staging, dev, .etc)` file in the project targeted environment directory, then run the `deploy-center.sh` script.
+To deploy an application, add your specific ssh keys to you ssh config (`~/.ssh/config`), like this :
+
+```bash
+Host my-target-machine
+    HostName
+    User
+    IdentityFile
+```
+
+Then set up the `*.env (prod, staging, dev, .etc)` file in the project targeted environment directory, then run the `deploy-center.sh` script.
 
 ```bash
 ./deploy-center.sh
 ```
 
-You will be prompted to choose the project to deploy, the environment, the target IP address and the user to connect to the target machine.
+You will be prompted to choose the project to deploy, the environment, and the ssh identity file to use.
 
 ### Environment variables
 
