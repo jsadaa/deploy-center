@@ -51,7 +51,7 @@ Then set up the `*.env (prod, staging, dev, .etc)` file in the project targeted 
 ./deploy-center.sh
 ```
 
-You will be prompted to choose the project to deploy, the environment, and the ssh identity file to use.
+You will be prompted to choose the project to deploy, the environment, and the ssh identity to use.
 
 ### Environment variables
 
